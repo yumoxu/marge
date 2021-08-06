@@ -1,0 +1,16 @@
+---
+# model_name
+# bert_rr
+model_name: 'bert_rr'
+
+mode: 'train'
+
+# 2005, 2006, 2007, tdqfs
+test_year: '2006'
+
+auto_parallel: True
+
+word_tokenizer: 'bert'  # bert, nltk
+preload_model_tokenizer: True  # True when using pre-trained Bert model: None, qa, rr
+
+path_type: 'afs'  # afs, local

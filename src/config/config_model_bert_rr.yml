@@ -1,0 +1,19 @@
+---
+variation: 'BertRR'
+
+model_name: BertRR
+fine_tune: 'rr'
+
+data_var: 'sample'
+max_n_tokens: 200
+checkpint: 4400
+
+d_batch: 4
+
+# following configs are the same as bert_qa, for DUC dataset
+max_ns_doc: 100
+max_nw_query: 100  # 100, 160, 256, 320, 400, 439
+max_nw_sent: 70
+# [CLS], [SEP] * 2
+# 173 (original query), 233, 329 (for 256 query expansion), 393 (for 320 query expansion), 473 (for 400 QE)
+max_n_tokens: 173
