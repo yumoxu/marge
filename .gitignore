@@ -1,7 +1,6 @@
 bin/
 lib/
 include/
-/data/
 man/
 /res/
 /model/
@@ -14,7 +13,6 @@ etc/
 share/
 src/.ipynb_checkpoints/
 src/temp
-/dataset/
 *.tar.gz
 *.ipynb
 pip-selfcheck.json
