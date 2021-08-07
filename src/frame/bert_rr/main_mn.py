@@ -364,7 +364,7 @@ def compute_rouge():
     return output
 
 
-def get_rank_dp(positional, multi_pass):
+def get_rank_dp(positional):
     """
         Copied from bert_marge/main.py.
 
@@ -372,9 +372,6 @@ def get_rank_dp(positional, multi_pass):
     dn = rr_config.RR_MODEL_NAME_BERT
     if positional:
         dn += '-w_pos'
-
-    if multi_pass:
-        dn += '-multipass'
     
     rank_dp = path_parser.summary_rank / dn
     return rank_dp
@@ -401,7 +398,7 @@ def build_unilm_input(src):
     text_dp = None
 
     if src == 'rank':
-        rank_dp = get_rank_dp(positional=True, multi_pass=rr_config.MULTI_PASS)
+        rank_dp = get_rank_dp(positional=True)
     elif src == 'text':
         text_dp = get_text_dp()
     
@@ -410,7 +407,6 @@ def build_unilm_input(src):
         rank_dp=rank_dp,
         text_dp=text_dp, 
         fix_input=True, 
-        multi_pass=rr_config.MULTI_PASS,
         cluster_ids=cids)
 
     if src == 'rank':

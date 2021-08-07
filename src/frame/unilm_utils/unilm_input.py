@@ -31,7 +31,7 @@ import tools.query_tools as query_tools
 
 class UniLMInput:
     def __init__(self, marge_config, rank_dp=None, text_dp=None, 
-            fix_input=True, multi_pass=False, cluster_ids=None, 
+            fix_input=True, cluster_ids=None, 
             prepend_len=False, prepend_query=None,
             test_cid_query_dicts=None):
         """
@@ -45,7 +45,6 @@ class UniLMInput:
                 - FILTER
 
             fix_input: fix the mess in the input sentences, if set True.
-            multi_pass: prepare the input for iterative generation, if set True.
         """
         super().__init__()
         self.marge_config = marge_config
@@ -53,9 +52,8 @@ class UniLMInput:
         self.text_dp =text_dp
         self.fix_input = fix_input
         self.tgt = 'TARGET_PLACEHOLDER'
-        self.multi_pass = multi_pass
+        self.multi_pass = False
 
-        # cluster_ids = tools.get_test_cc_ids()
         self.cluster_ids = cluster_ids
         self.prepend_len = prepend_len
         self.prepend_query = prepend_query

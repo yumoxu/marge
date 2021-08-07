@@ -2,20 +2,9 @@ import utils.config_loader as config
 import ir.ir_config as ir_config
 
 # set following macro vars
-
-# config.QUERY
-# For TD-QFS: 'add_mask', 'add_left_mask', 'add_left_mask_right_dot', pred@grsum-tdqfs-0.6_cos-0_wan-nw_250@masked-ratio-reveal_1.0
-# pred@grsum-tdqfs-0.6_cos-0_wan-nw_250@masked-ratio-reveal_1.0
-# pred@grsum-tdqfs-0.6_cos-0_wan-ns_10@masked-ratio-reveal_1.0
-# pred@grsum-tdqfs-0.6_cos-0_wan-nw_400@masked-ratio-reveal_1.0
-# pred@grsum-tdqfs-0.6_cos-0_wan-ns_20@masked-ratio-reveal_1.0
-# pred@grsum-tdqfs-1.0_cos-0_wan-nw_250@masked-ratio-reveal_1.0
-# pred@centrality-hard_bias-0.85_damp-ir-tf-2007-0.6_cos-ns_5@masked-ratio-reveal_1.0
-# pred@grsum-tdqfs-0.6_cos-0_wan-nw_250@masked-ratio-reveal_1.0-remove_base
-# pred@rr-39_config-26000_iter-add_left_mask_right_dot-ir-dial-tf-tdqfs-0.6_cos-nw_250@masked-ratio-reveal_1.0-remove_base
-# pred@rr-39_config-26000_iter-add_left_mask_right_dot-ir-dial-tf-tdqfs-0.6_cos-nw_250@masked-ratio-reveal_1.0
-# pred@rr-34_config-25000_iter-add_left_mask_right_dot-ir-dial-tf-tdqfs-0.6_cos-nw_250@masked-ratio-reveal_1.0-remove_base
-QUERY_TYPE = None
+# For DUC: config.QUERY
+# For TD-QFS: pred@grsum-tdqfs-0.6_cos-0_wan-nw_250@masked-ratio-reveal_1.0
+QUERY_TYPE = config.QUERY
 
 NO_QUERY = True if not QUERY_TYPE else False
 if config.rr_config_id in [14, 15, 16, 17, 18, 19]:
@@ -38,15 +27,6 @@ elif config.meta_model_name == 'bert_qa':  # for ablation study: build unilm in 
 else:
     raise ValueError(f'Invalid mode_name: {config.meta_model_name}')
 
-#### for multi-hop inference
-MULTI_HOP = False
-MAX_HOPS = 4
-BEAM_SIZE = 5
-if MULTI_HOP:
-    RR_MODEL_NAME_BERT = RR_MODEL_NAME_BERT + f'-multihop_{MAX_HOPS}'
-    if BEAM_SIZE > 1:
-        RR_MODEL_NAME_BERT = RR_MODEL_NAME_BERT + f'-beam_{BEAM_SIZE}'
-
 RELEVANCE_SCORE_DIR_NAME = RR_MODEL_NAME_BERT
 
 #### for Multi-News
@@ -64,7 +44,6 @@ CONF_THRESHOLD_RR = 0.4  # 0.95, 0.75
 COMP_RATE_RR = 0.85
 # 40~150, 
 # QA: 90: sentence, 110: passage
-# RR: 
 TOP_NUM_RR = 150
 
 if FILTER == 'conf':
@@ -104,8 +83,6 @@ RR_FINER_TUNE_DIR_NAME_BERT_MN = f'rr_finer_tune-{RR_MODEL_NAME_BERT_MN}'
         - UNILM_IN_FILE_NAME
         - POSITIONAL
         - PREPEND_LEN
-        - MULTI_PASS
-
 """
 USE_TEXT=False
 if USE_TEXT:  # can sentences selected by rr or centrality
@@ -129,10 +106,6 @@ PREPEND_LEN=True
 if PREPEND_LEN:
     UNILM_IN_FILE_NAME += '-prepend_len'
 
-MULTI_PASS=False
-if MULTI_PASS:
-    UNILM_IN_FILE_NAME += '-multipass'
-
 PREPEND_QUERY='masked'  # 'raw', 'masked', None, add_left_mask_right_dot
 if PREPEND_QUERY:
     UNILM_IN_FILE_NAME += f'-prepend_{PREPEND_QUERY}_q'
@@ -148,27 +121,8 @@ UNILM_IN_FILE_NAME += '.json'
 
 from pathlib import Path
 UNILM_MODEL_ID2CKPT = {
-    2: 33000,
-    4: 4500,
-    5: 3000,
-    6: 10500,
-    7: 3000,  # 6000, best mn dev: 10500
-    8: 10500,
-    9: 15000,
-    10: 10500,
-    12: 7500,  # best mn dev: 9000
-    14: 3000,
-    15: 4500,
-    16: 4000,
-    17: 2500,  # 2500 (RR-34)
-    18: 2000,  # ablation: MN with query; 1000 is good too
-    19: 2000,
-    20: 7500,  # baseline: UniLM-CNN/DM
-    22: 7500,
-    23: 3000,
-    24: 2000,
-    25: 3000,
-    26: 3000,
+    7: 3000,
+    17: 2500,
 }
 UNILM_MODEL_ID = 17 # 7 (MN), 17 (MCD)
 UNILM_CKPT = UNILM_MODEL_ID2CKPT[UNILM_MODEL_ID]
@@ -189,15 +143,11 @@ if PREPEND_LEN:
     UNILM_DECODE_FILE_NAME += '-prepend_len'
     UNILM_OUT_DIR_NAME += '-prepend_len'
 
-if MULTI_PASS:
-    UNILM_DECODE_FILE_NAME += '-multipass'
-    UNILM_OUT_DIR_NAME += '-multipass'
-
 if PREPEND_QUERY:
     UNILM_DECODE_FILE_NAME += f'-prepend_{PREPEND_QUERY}_q'
     UNILM_OUT_DIR_NAME += f'-prepend_{PREPEND_QUERY}_q'
 
-DECODE_AFFIX = ''  # 300-PP, 400, PP-step_0.1
+DECODE_AFFIX = ''
 if DECODE_AFFIX:
     UNILM_DECODE_FILE_NAME += f'-{DECODE_AFFIX}'
     UNILM_OUT_DIR_NAME += f'-{DECODE_AFFIX}'
@@ -221,10 +171,6 @@ def override_glob_vars(unilm_model_id, unilm_ckpt):
     if PREPEND_LEN:
         UNILM_DECODE_FILE_NAME += '-prepend_len'
         UNILM_OUT_DIR_NAME += '-prepend_len'
-
-    if MULTI_PASS:
-        UNILM_DECODE_FILE_NAME += '-multipass'
-        UNILM_OUT_DIR_NAME += '-multipass'
 
     if PREPEND_QUERY:
         UNILM_DECODE_FILE_NAME += f'-prepend_{PREPEND_QUERY}_q'

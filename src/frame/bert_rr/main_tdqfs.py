@@ -377,7 +377,6 @@ def build_unilm_input(src):
         'rank_dp': rank_dp,
         'text_dp': text_dp,
         'fix_input': True,
-        'multi_pass': rr_config.MULTI_PASS,
         'cluster_ids': cids,
         'prepend_len': rr_config.PREPEND_LEN,
     }
