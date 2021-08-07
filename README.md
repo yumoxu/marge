@@ -57,8 +57,9 @@ self.rouge_dir = '~/ROUGE-1.5.5/data'  # specify your ROUGE dir
 ```
 
 ## Preparing benchmark data
-Since we are not allowed to distribute **DUC** clusters and summaries, you can request DUC 2005-2007 from [NIST](https://www-nlpir.nist.gov/projects/duc/data.html). After acquiring the data, gather each year's clusters and summaries under `data/duc_cluster` and `data/duc_summary`, respectively. For instance, DUC 2006's clusters and  summaries should be found under `data/duc_cluster/2006/`, `data/topics/2006.sgml` and `data/duc_summary/2006/`, respectively. 
-For DUC queries: you don't have to prepare by yourself; we have put 3 `json` files for DUC 2005, 2006 and 2007 under `data/masked_query`, which contain a raw query and a masked query for each cluster. Queries will be fetched from these files at test time.
+Since we are not allowed to distribute **DUC** clusters and summaries, you can request DUC 2005-2007 from [NIST](https://www-nlpir.nist.gov/projects/duc/data.html). After acquiring the data, gather each year's clusters and summaries under `data/duc_cluster` and `data/duc_summary`, respectively. 
+For instance, DUC 2006's clusters and  summaries should be found under `data/duc_cluster/2006/` and `data/duc_summary/2006/`, respectively. 
+For DUC queries: you don't have to prepare queries by yourself; we have put 3 `json` files for DUC 2005-2007 under `data/masked_query`, which contain a raw query and a masked query for each cluster. Queries will be fetched from these files at test time.
 
 **TD-QFS** data can be downloaded from [here](https://talbaumel.github.io/TD-QFS/files/TD-QFS.zip).
 You can also use the processed version [here](https://drive.google.com/file/d/1fPZFRAfaojJNEeyk7cKEMlVti1UhIfFs/view?usp=sharing).
@@ -66,7 +67,7 @@ You can also use the processed version [here](https://drive.google.com/file/d/1f
 After data preparation, you should have the following directory structure with the right files under each folder:
 
 ```bash
-margesum
+marge
 └───data
 │   └───duc_clusters   # DUC clusters 
 │   └───duc_summaries  # DUC reference summaries 
