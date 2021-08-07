@@ -1,4 +1,4 @@
-# MaRGE
+# marge
 
 This repository releases the code for Generating Query Focused Summaries from Query-Free Resources. 
 
@@ -15,7 +15,7 @@ Should you have any query please contact me at yumo.xu@ed.ac.uk.
 
 ## Project structure
 ```bash
-margesum
+marge
 └───requirements.txt
 └───README.md
 └───log        # logging files
@@ -38,8 +38,8 @@ mkdir log data graph model rank text unilm_in unilm_out
 ## Creating environment
 ```bash
 cd ..
-virtualenv -p python3.6 margesum
-cd margesum
+virtualenv -p python3.6 marge
+cd marge
 . bin/activate
 pip install -r requirements.txt
 ```
