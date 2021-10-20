@@ -33,6 +33,7 @@ marge
 After cloning this project, use the following command to initialize the structure:
 ```bash
 mkdir log data graph model rank text unilm_in unilm_out
+touch log/BertRR.log
 ```
 
 ## Creating environment
@@ -77,9 +78,13 @@ marge
 
 # MaRGE: query modeling
 ## Preparing training data
+The first step is to download raw Multi-News and CNN/DM data. Put them under `data/{dataset}/raw` where `dataset` is `multinews` or `cnndm`. 
+- For MultiNews, you should have `.src.cleaned` ([download link](https://drive.google.com/drive/folders/1jwBzXBVv8sfnFrlzPnSUBHEEAbpIUnFq))  files and `.tgt` ([download link](https://drive.google.com/drive/folders/1uDarzpu2HFc-vjXNJCRv2NIHzakpSGOw))f files.
+- For CNN/DM, you should have `url_lists`, `cnn/stories`, `dailymail/stories` ([download link](https://github.com/abisee/cnn-dailymail)). 
+
 Source files for building training data are under `src/sripts`. For each dataset (Multi-News or CNN/DM), there are three  steps  create MaRGE training data. 
 
-A training sample for Marge can be represented as {sentence, masked summary}->ROUGE(sentence, summary). So we need to get the ROUGE scores for all sentences (step 1) and creating masked summaries (step 2). Then we put them together (step 3).
+A training sample for MaRGE can be represented as {sentence, masked summary}->ROUGE(sentence, summary). So we need to get the ROUGE scores for all sentences (step 1) and creating masked summaries (step 2). Then we put them together (step 3).
 
 1. Calculate ROUGE scores for all sentences: 
 
@@ -99,11 +104,18 @@ A training sample for Marge can be represented as {sentence, masked summary}->RO
   python src/sripts/build_marge_dataset_mn.py
   ```
 
-In our experiments, Marge trained on data from **Multi-News** yielded the best performance in query modeling. 
+In our experiments, MaRGE trained on data from **Multi-News** yielded the best performance in query modeling. 
 If you want to build training data from CNN/DM:
 1. Use the function `gathered_mp_dump_sentence_cnndm()` in the first step (otherwise, use the function `gathered_mp_dump_sentence_mn()` )
 2. Set `dataset='cnndm'` in the second step (otherwise, `dataset='mn'`)
 3. Use `build_marge_dataset_cnndm.py` instead for the last step
+
+**Question**: *What should I do if I want to use MaRGE on my own dataset?* 
+
+**Answer**: start with building a customized data parser for your dataset at hand. 
+The two existing parsers included in this project, `mn_parser.py` and `cnndm_parser.py`, can be found under `src/data`. 
+You can write a new, structurally similar parser class, which can then be imported to the scripts introduced in this section to reuse the pipeline. For instance, in `dump_sentence_rouge_mp.py`, [this](https://github.com/yumoxu/marge/blob/be003cf9db8caed431b4d6717c903343e6713cda/src/scripts/dump_sentence_rouge_mp.py#L20) line now imports the parser for `MultiNewsParser`, but can be altered to any other parser added under `src/data` for your customized data.
+
 
 ## Model training 
 
