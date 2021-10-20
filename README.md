@@ -78,9 +78,9 @@ marge
 
 # MaRGE: query modeling
 ## Preparing training data
-The first step is to download raw Multi-News and CNN/DM data. Put them under `data/{dataset}/raw` where `dataset` is `multinews` or `cnndm`. 
-- For MultiNews, you should have `.src.cleaned` ([download link](https://drive.google.com/drive/folders/1jwBzXBVv8sfnFrlzPnSUBHEEAbpIUnFq))  files and `.tgt` ([download link](https://drive.google.com/drive/folders/1uDarzpu2HFc-vjXNJCRv2NIHzakpSGOw))f files.
-- For CNN/DM, you should have `url_lists`, `cnn/stories`, `dailymail/stories` ([download link](https://github.com/abisee/cnn-dailymail)). 
+The first step is to download raw Multi-News and CNN/DM data. Put them under `data/{dataset}/raw` where `dataset` can `multinews` or `cnndm`. 
+- For MultiNews, prepare `.src.cleaned` files ([download link](https://drive.google.com/drive/folders/1jwBzXBVv8sfnFrlzPnSUBHEEAbpIUnFq)) and `.tgt` files ([download link](https://drive.google.com/drive/folders/1uDarzpu2HFc-vjXNJCRv2NIHzakpSGOw)).
+- For CNN/DM, prepare `url_lists`, `cnn/stories` and `dailymail/stories` ([download link](https://github.com/abisee/cnn-dailymail)). 
 
 Source files for building training data are under `src/sripts`. For each dataset (Multi-News or CNN/DM), there are three  steps  create MaRGE training data. 
 
