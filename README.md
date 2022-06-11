@@ -75,6 +75,12 @@ marge
 │   └───masked_query   # DUC queries (raw and masked)
 │   └───tdqfs          # TD-QFS clusters, queries and reference summaries
 ```
+## Pretrained models
+Please use [this](https://drive.google.com/drive/folders/10vOlQaJYplztSdBnNe51MqHNvHuMmymv?usp=sharing) link the access the checkpoints, including the best performing pipeline of:
+1. `marge.multinews`: an evidence ranker trained on Multi-News, and
+2. `margesum.cnndm`: a summary generator trained on CNN/DM. 
+
+Put the zip files under `marge/model` and then unzip them.
 
 # MaRGE: query modeling
 ## Preparing training data

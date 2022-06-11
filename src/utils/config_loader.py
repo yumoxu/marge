@@ -172,14 +172,15 @@ def load_bert_qa():
 
 
 rr_config_id2iter = {
-    'mn': 25000,
+    'multinews': 25000,
     'cnndm': 26000,
 }
 
-rr_config_id = 'mn'  # mn, cnndm
+rr_config_id = 'multinews'  # multinews, cnndm
 rr_iter = rr_config_id2iter[rr_config_id]
+
 def load_bert_rr():
-    root = path_parser.model_save / f'rr_{rr_config_id}' / f'checkpoint-{rr_iter}'
+    root = path_parser.model_save / f'marge.{rr_config_id}' / f'checkpoint-{rr_iter}'
     rr_config_fp = root / 'config.json'
     rr_model_fp = root / 'pytorch_model.bin'
     
