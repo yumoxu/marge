@@ -42,8 +42,8 @@ from sklearn.metrics.pairwise import cosine_similarity
 import shutil
 import summ.compute_rouge as rouge
 
-from querysum.unilm_utils.unilm_eval import UniLMEval
-from querysum.unilm_utils.unilm_input import UniLMInput
+from frame.unilm_utils.unilm_eval import UniLMEval
+from frame.unilm_utils.unilm_input import UniLMInput
 
 import tools.general_tools as general_tools
 

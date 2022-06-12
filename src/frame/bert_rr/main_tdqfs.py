@@ -55,7 +55,7 @@ import tools.general_tools as general_tools
 
     rr_records can be generated with different threhold, e.g., confidence-based (CONF_THRESHOLD_RR) or TopK-based (TOP_NUM_RR).
 
-    tune() can tune threholds. Also, you can use it to produce TopK Recall Curve, which can be used to evaluate Semantic Matching Model.
+    You can tune() to produce TopK Recall Curve, which can be used to evaluate Semantic Matching Model.
 
 """
 
@@ -409,11 +409,8 @@ if __name__ == '__main__':
     init()
     dump_rel_scores()
     rel_scores2rank()
-    # rel_scores2rank_with_positional_sid()
-    
-    # tune()  # select div hyper-parameter
 
-    rr_rank2records()  # with selected hyper-parameter
+    rr_rank2records()
     select_e2e_tdqfs()
     compute_rouge_tdqfs()
 
