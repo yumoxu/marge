@@ -1,9 +1,9 @@
 export TASK_NAME=rr
-export MODEL_NAME=rr_cnndm
-export PROJ_ROOT=~/shiftsum
+export MODEL_NAME=marge.cnndm
+export PROJ_ROOT=~/marge
 
-export DATASET=multinews
-export MARGE_DATASET=marge_l2020-ratio-reveal_0.0
+export DATASET=cnndm
+export MARGE_DATASET=marge_l33-ratio-reveal_0.0
 export DATA_DIR=${PROJ_ROOT}/data/${DATASET}/${MARGE_DATASET}
 
 export OUTPUT_DIR=${PROJ_ROOT}/model/${MODEL_NAME}

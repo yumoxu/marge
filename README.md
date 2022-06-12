@@ -125,12 +125,7 @@ You can write a new, structurally similar parser class, which can then be import
 
 ## Model training 
 
-Depending on which training data you have built, you can run either one of the following two scripts:
-
-```python
-. ./run/run_rr_cnndm.sh   # train MaRGE with data from CNN/DM
-. ./run/run_rr_mn.sh  # train MaRGE with data from Multi-News
-```
+Depending on the training data (CNN/DM or Multi-News), you can run one of the scripts under `run/`. 
 Configs specified in these two files are used in our experiments, but feel free to change them for further experimentation.
 
 ## Inference and evaluation
