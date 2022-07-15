@@ -76,7 +76,7 @@ marge
 │   └───tdqfs          # TD-QFS clusters, queries and reference summaries
 ```
 ## Pretrained models
-Please use [this](https://drive.google.com/drive/folders/10vOlQaJYplztSdBnNe51MqHNvHuMmymv?usp=sharing) link the access the checkpoints, including the best performing pipeline of:
+Please use [this](https://drive.google.com/drive/folders/10vOlQaJYplztSdBnNe51MqHNvHuMmymv?usp=sharing) link to access the checkpoints, including the best performing pipeline of:
 1. `marge.multinews`: an evidence ranker trained on Multi-News, and
 2. `margesum.cnndm`: a summary generator trained on CNN/DM. 
 
@@ -147,6 +147,9 @@ select_e2e()
 
 # MaRGESum: summary generation
 
+## System output release
+You can access the system outputs for MaRGESum-CD and MaRGESum-MN on DUC 2006-07 and TDQFS via [this](https://drive.google.com/drive/folders/1YN8bg8j5aQ0J1YUeRYI_6Lmhsgpf6UH8?usp=sharing) link. 
+
 ## Prepare training data from Multi-News
 To train a controllable generator, we make the following three changes to the input from Multi-News (and CNN/DM):
 1. Re-order input sentences according to their ROUGE scores, so the top ones will be biased over:
@@ -165,7 +168,6 @@ This involves in [Dr.QA](https://github.com/facebookresearch/DrQA) to index all 
 ```Python
 python scripts/build_cnndm_clusters.py
 ```
-- [ ] upload the training data, so you can use this multi-document CNN/DM without making it from scratch.  
 
 
 ## Inference and evaluation
@@ -179,9 +181,6 @@ build_unilm_input(src='rank')
 This turns ranked evidence from Marge into MargeSum input files. 
 
 Now You can evaluate the trained UniLM model for developement and testing. Go to the UniLM project root, set the correct input directory, and deocode the summaries.
-
-- [ ] add detailed documentation for setting up UniLM.
-- [ ] add detailed documentation for decoding.
 
 To evaluate the output, use the following function in `src/frame/rr/main.py`:
 ### 
